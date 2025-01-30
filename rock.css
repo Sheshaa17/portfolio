@@ -1,0 +1,429 @@
+/* Base styles */
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e40af;
+    --text-color: #1f2937;
+    --bg-color: #f3f4f6;
+    --card-bg: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+/* Header styles with floating effect */
+.header {
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    animation: slideDown 0.5s ease;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+.header nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    margin: 0;
+    padding: 1rem;
+}
+
+.header nav ul li {
+    margin: 0 1.5rem;
+}
+
+.header nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 0.5rem 0;
+}
+
+.header nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.header nav ul li a:hover::after {
+    width: 100%;
+}
+
+/* Hero section with particle effect */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='2' fill='rgba(255,255,255,0.2)'/%3E%3C/svg%3E");
+    animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero-content h1 {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    opacity: 0;
+    filter: blur(10px);
+    animation: fadeInBlur 1s ease forwards;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s ease 0.5s forwards;
+}
+
+@keyframes fadeInBlur {
+    to {
+        opacity: 1;
+        filter: blur(0);
+    }
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Profile photo styles */
+.profile-photo {
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 2rem;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    animation: profileAppear 1s ease forwards;
+    transform: scale(0.8);
+    opacity: 0;
+}
+
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.profile-photo::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2));
+    animation: shine 2s infinite;
+}
+
+@keyframes profileAppear {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes shine {
+    0% {
+        transform: translateX(-100%) rotate(45deg);
+    }
+    20%, 100% {
+        transform: translateX(100%) rotate(45deg);
+    }
+}
+
+.profile-photo:hover img {
+    transform: scale(1.1);
+}
+
+/* Section styles with gradient borders */
+.section {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+/* Card styles with 3D hover effect */
+.card {
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transform-style: preserve-3d;
+    transition: all 0.5s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(5deg);
+    box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.1),
+                -20px -20px 60px rgba(255, 255, 255, 0.8);
+}
+
+.card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.card h3::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.card:hover h3::after {
+    width: 100%;
+}
+
+.card ul {
+    margin-top: 1rem;
+    padding-left: 1.5rem;
+}
+
+.card ul li {
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover ul li {
+    opacity: 1;
+}
+
+/* Skills grid with floating animation */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.skill {
+    background-color: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
+}
+
+.skill:hover::before {
+    left: 100%;
+}
+
+.skill:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(135deg, var(--card-bg), #f8f9fa);
+}
+
+/* Contact section styles */
+.contact-card {
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    padding: 2rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.email-link {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.email-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.email-link:hover {
+    color: var(--secondary-color);
+}
+
+.email-link:hover::after {
+    width: 100%;
+}
+
+/* Footer styles with gradient */
+.footer {
+    background: linear-gradient(to right, var(--card-bg), #f8f9fa);
+    text-align: center;
+    padding: 2rem;
+    margin-top: 4rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .header nav ul {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .header nav ul li {
+        margin: 0.5rem 0;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+
+    .section {
+        padding: 3rem 1rem;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+}
